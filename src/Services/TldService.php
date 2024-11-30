@@ -3,7 +3,7 @@
 namespace HostMyServers\NetimRestApi\Services;
 
 /**
- * Service pour gérer les hébergements web via l'API Netim.
+ * Service pour gérer les requests liées aux TLD/gTLD.
  */
 class TldService extends BaseService
 {
