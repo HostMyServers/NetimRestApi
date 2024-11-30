@@ -66,7 +66,7 @@ class DomainService extends BaseService
     public function updateDNS(string $domain, array $nameservers): object
     {
         return $this->request('PUT', sprintf('domain/%s/dns/', $domain), [
-            'json' => ['nameservers' => $nameservers]
+            'json' => $nameservers
         ]);
     }
 

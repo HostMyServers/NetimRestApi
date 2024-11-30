@@ -33,7 +33,7 @@ class ZonesService extends BaseService
     public function createDnsZone(string $domain, array $records): object
     {
         return $this->request('POST', sprintf('domain/%s/zone/', $domain), [
-            'json' => ['records' => $records]
+            'json' => $records
         ]);
     }
 
@@ -48,7 +48,7 @@ class ZonesService extends BaseService
     /**
      * Get the list of DNS records
      */
-    public function getDnsRecordsList(string $domain): object
+    public function getDnsRecordsList(string $domain): array
     {
         return $this->request('GET', sprintf('domain/%s/zone/', $domain));
     }

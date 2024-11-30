@@ -51,6 +51,9 @@ class NetimClient
         ]);
 
         $this->domain = new DomainService($this->httpClient);
+        $this->zones = new ZonesService($this->httpClient);
+        $this->contact = new ContactService($this->httpClient);
+        $this->tld = new TldService($this->httpClient);
         // $this->webHosting = new WebHostingService($this->httpClient);
     }
 
