@@ -21,7 +21,7 @@ abstract class BaseService
         $this->logger = $logger;
     }
 
-    protected function request(string $method, string $endpoint, array $options = []): array
+    protected function request(string $method, string $endpoint, array $options = [], bool $asArray = false): array|object
     {
         try {
             if ($this->logger) {
@@ -33,18 +33,26 @@ abstract class BaseService
             }
 
             $response = $this->httpClient->request($method, $endpoint, $options);
-            $data = json_decode($response->getBody()->getContents(), true);
+            $data = json_decode($response->getBody()->getContents(), $asArray);
 
             if ($this->logger) {
                 $this->logger->info("Réponse de l'API Netim", ['response' => $data]);
             }
 
-            if (isset($data['error'])) {
-                $errorMessage = $data['error']['message'] ?? 'Une erreur inconnue est survenue.';
-                $apiErrorCode = $data['error']['code'] ?? null;
-                $apiErrorData = $data['error']['data'] ?? null;
-
-                throw new NetimException($errorMessage, $apiErrorCode, $apiErrorData);
+            if ($asArray) {
+                if (isset($data['error'])) {
+                    $errorMessage = $data['error']['message'] ?? 'Une erreur inconnue est survenue.';
+                    $apiErrorCode = $data['error']['code'] ?? null;
+                    $apiErrorData = $data['error']['data'] ?? null;
+                    throw new NetimException($errorMessage, $apiErrorCode, $apiErrorData);
+                }
+            } else {
+                if (isset($data->error)) {
+                    $errorMessage = $data->error->message ?? 'Une erreur inconnue est survenue.';
+                    $apiErrorCode = $data->error->code ?? null;
+                    $apiErrorData = $data->error->data ?? null;
+                    throw new NetimException($errorMessage, $apiErrorCode, $apiErrorData);
+                }
             }
 
             return $data;
