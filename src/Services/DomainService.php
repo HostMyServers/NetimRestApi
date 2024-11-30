@@ -163,7 +163,7 @@ class DomainService extends BaseService
      */
     public function setDomainLock(string $domain, string $locked): object
     {
-        return $this->request('PUT', sprintf('domain/%s/preference/', $domain), [
+        return $this->request('PATCH', sprintf('domain/%s/preference/', $domain), [
             'json' => [
                 'codePref' => 'registrar_lock',
                 'value' => $locked
