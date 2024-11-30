@@ -4,6 +4,7 @@ namespace HostMyServers\NetimRestApi;
 
 use GuzzleHttp\Client;
 use HostMyServers\NetimRestApi\Services\TldService;
+use HostMyServers\NetimRestApi\Services\ZonesService;
 use HostMyServers\NetimRestApi\Services\DomainService;
 use HostMyServers\NetimRestApi\Services\ContactService;
 use HostMyServers\NetimRestApi\Services\WebHostingService;
@@ -20,6 +21,7 @@ class NetimClient
     public ContactService $contact;
     public WebHostingService $webHosting;
     public TldService $tld;
+    public ZonesService $zones;
 
     /**
      * Constructeur de la classe NetimClient.
