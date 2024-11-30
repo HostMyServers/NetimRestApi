@@ -17,7 +17,7 @@ class DomainService extends BaseService
      */
     public function checkDomain(string $domain): object
     {
-        return $this->request('GET', sprintf('domain/%s/check/', $domain));
+        return $this->request('GET', sprintf('domain/%s/check/', $domain))[0];
     }
 
     /**
