@@ -40,9 +40,11 @@ class ZonesService extends BaseService
     /**
      * Delete the DNS zone of a domain
      */
-    public function deleteDnsZone(string $domain): object
+    public function deleteDnsZone(string $domain, $records): object
     {
-        return $this->request('DELETE', sprintf('domain/%s/zone/', $domain));
+        return $this->request('DELETE', sprintf('domain/%s/zone/', $domain), [
+            'json' => $records
+        ]);
     }
 
     /**
