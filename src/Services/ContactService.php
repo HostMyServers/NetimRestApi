@@ -2,16 +2,13 @@
 
 namespace HostMyServers\NetimRestApi\Services;
 
-/**
- * Service pour gérer les contacts via l'API Netim.
- */
 class ContactService extends BaseService
 {
     /**
-     * Crée un nouveau contact
+     * Creates a new contact
      *
-     * @param array $contactData Les données du contact à créer
-     * @return object La réponse de l'API contenant l'ID du contact
+     * @param array $contactData Contact data to create
+     * @return object API response containing the contact ID
      */
     public function createContact(array $contactData): object
     {
@@ -23,10 +20,10 @@ class ContactService extends BaseService
     }
 
     /**
-     * Récupère les informations d'un contact
+     * Retrieves contact information
      *
-     * @param string $contactId L'ID du contact
-     * @return object Les informations du contact
+     * @param string $contactId Contact ID
+     * @return object Contact information
      */
     public function getContact(string $contactId): object
     {
@@ -34,11 +31,11 @@ class ContactService extends BaseService
     }
 
     /**
-     * Met à jour un contact existant
+     * Updates an existing contact
      *
-     * @param string $contactId L'ID du contact
-     * @param array $contactData Les nouvelles données du contact
-     * @return object La réponse de l'API
+     * @param string $contactId Contact ID
+     * @param array $contactData New contact data
+     * @return object API response
      */
     public function updateContact(string $contactId, array $contactData): object
     {
@@ -50,10 +47,10 @@ class ContactService extends BaseService
     }
 
     /**
-     * Supprime un contact
+     * Deletes a contact
      *
-     * @param string $contactId L'ID du contact à supprimer
-     * @return object La réponse de l'API
+     * @param string $contactId ID of the contact to delete
+     * @return object API response
      */
     public function deleteContact(string $contactId): object
     {
@@ -61,11 +58,11 @@ class ContactService extends BaseService
     }
 
     /**
-     * Récupère la liste des contacts filtrée
+     * Retrieves filtered list of contacts
      *
-     * @param string $field Champ sur lequel appliquer le filtre (id, firstName, lastName, bodyForm, isOwner)
-     * @param string $filter Filtre à appliquer (peut utiliser * comme joker)
-     * @return array Liste des contacts correspondant au filtre
+     * @param string $field Field to apply the filter on (id, firstName, lastName, bodyForm, isOwner)
+     * @param string $filter Filter to apply (can use * as wildcard)
+     * @return array List of contacts matching the filter
      */
     public function getContactList(string $field, string $filter): array
     {
