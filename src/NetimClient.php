@@ -16,7 +16,7 @@ class NetimClient
     protected ?string $sessionToken = null;
     protected bool $sessionClosed = false;
 
-    // Instances des services
+    // Service instances
     public DomainService $domain;
     public ContactService $contact;
     public WebHostingService $webHosting;
@@ -24,7 +24,7 @@ class NetimClient
     public ZonesService $zones;
 
     /**
-     * Constructeur de la classe NetimClient.
+     * NetimClient class constructor.
      */
     public function __construct()
     {
@@ -34,13 +34,13 @@ class NetimClient
         $this->apiUrl = config('netim.api_url');
 
         if (!$login || !$secret) {
-            throw new \RuntimeException('Les identifiants Netim (login et secret) sont requis');
+            throw new \RuntimeException('Netim credentials (login and secret) are required');
         }
 
-        // Création de la session initiale avec Basic Auth
+        // Initialize the initial session with Basic Auth
         $this->initSession($login, $secret);
 
-        // Configuration du client avec le token de session
+        // Configure the client with the session token
         $this->httpClient = new Client([
             'base_uri' => $this->apiUrl,
             'headers' => [
@@ -58,7 +58,7 @@ class NetimClient
     }
 
     /**
-     * Initialise une session avec l'API Netim
+     * Initialize a session with Netim API
      */
     protected function initSession(string $login, string $secret): void
     {
@@ -76,17 +76,17 @@ class NetimClient
             $data = json_decode($response->getBody()->getContents(), true);
 
             if (!isset($data['access_token'])) {
-                throw new \RuntimeException('Token de session non reçu de l\'API Netim');
+                throw new \RuntimeException('Session token not received from Netim API');
             }
 
             $this->sessionToken = $data['access_token'];
         } catch (\Exception $e) {
-            throw new \RuntimeException('Échec de l\'initialisation de la session Netim: ' . $e->getMessage());
+            throw new \RuntimeException('Netim session initialization failed: ' . $e->getMessage());
         }
     }
 
     /**
-     * Récupère le token de session actuel
+     * Get the current session token
      */
     public function getSessionToken(): ?string
     {
