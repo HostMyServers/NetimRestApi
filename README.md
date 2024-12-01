@@ -112,39 +112,53 @@ $netim->closeSession();
 
 ## Available Methods
 
-### Domain Management
-- `checkDomain(string $domain)`: Check domain availability
-- `checkMultipleDomains(array $domains)`: Check multiple domains availability
-- `createDomain(array $domainData)`: Register a new domain
+### Domain Management (DomainService)
 - `getDomainInfo(string $domain)`: Get domain information
-- `transferDomain(string $domain, array $transferData)`: Transfer a domain
-- `renewDomain(string $domain, array $renewData)`: Renew a domain
+- `checkDomain(string $domain)`: Check domain availability
+- `checkDomainClaim(string $domain)`: Check domain claims
+- `createDomain(array $domainData)`: Register a new domain
+- `transferDomain(string $domain, array $transferData)`: Transfer a domain to Netim
+- `transferDomainTrade(string $domain, array $transferData)`: Transfer and trade a domain
+- `renewDomain(string $domain, int $period)`: Renew a domain
+- `updateDNS(string $domain, array $nameservers)`: Update DNS servers
+- `setWhoisPrivacy(string $domain, bool $enabled)`: Enable/Disable WHOIS privacy
+- `setAutoRenew(string $domain, bool $enabled)`: Enable/Disable auto-renewal
+- `getWhois(string $domain)`: Get WHOIS information
 - `deleteDomain(string $domain)`: Delete a domain
 - `getDomainsList()`: Get list of all domains
-
-### DNS Management
-- `updateDNS(string $domain, array $nameservers)`: Update domain nameservers
-- `getDNS(string $domain)`: Get domain nameservers
-- `setDNSSEC(string $domain, array $dnssecData)`: Configure DNSSEC
-- `getDNSSEC(string $domain)`: Get DNSSEC configuration
-
-### Domain Settings
-- `setWhoisPrivacy(string $domain, bool $enabled)`: Enable/Disable WHOIS privacy
-- `getWhoisPrivacy(string $domain)`: Get WHOIS privacy status
-- `setAutoRenew(string $domain, bool $enabled)`: Enable/Disable auto-renewal
-- `getAutoRenew(string $domain)`: Get auto-renewal status
-- `setDomainLock(string $domain, bool $locked)`: Update domain lock status
-- `getDomainLock(string $domain)`: Get domain lock status
-
-### Contact Management
-- `updateContacts(string $domain, array $contacts)`: Update domain contacts
-- `getContacts(string $domain)`: Get domain contacts
-
-### Other Operations
-- `getWhois(string $domain)`: Get domain WHOIS information
-- `requestAuthCode(string $domain)`: Request auth code for domain transfer
-- `getDomainHistory(string $domain)`: Get domain operations history
+- `setDNSSEC(string $domain, int $enabled)`: Configure DNSSEC
+- `setDNSSECExt(string $domain, array $dnssecData)`: Configure external DNSSEC
+- `setDomainLock(string $domain, string $locked)`: Update domain lock status
+- `requestAuthCode(string $domain, int $sendtoregistrant)`: Request authorization code
 - `restoreDomain(string $domain)`: Restore an expired domain
+
+### Zones Management (ZonesService)
+- `initializeDnsZone(string $domain, array $options)`: Initialize a DNS zone
+- `initializeSoaRecord(string $domain, array $options)`: Initialize SOA record
+- `createDnsZone(string $domain, array $records)`: Create a DNS zone
+- `deleteDnsZone(string $domain, $records)`: Delete a DNS zone
+- `getDnsRecordsList(string $domain)`: Get list of DNS records
+- `createMailForward(string $domain, string $source, string $destination)`: Create an email forward
+- `deleteMailForward(string $domain, string $source)`: Delete an email forward
+- `getMailForwardsList(string $domain)`: Get list of email forwards
+- `createWebForward(string $domain, string $source, string $destination, array $options)`: Create a web forward
+- `deleteWebForward(string $domain, string $source)`: Delete a web forward
+- `getWebForwardsList(string $domain)`: Get list of web forwards
+
+### Contact Management (ContactService)
+- `createContact(array $contactData)`: Create a new contact
+- `getContact(string $contactId)`: Get contact information
+- `updateContact(string $contactId, array $contactData)`: Update a contact
+- `deleteContact(string $contactId)`: Delete a contact
+- `getContactList(string $field, string $filter)`: Get filtered list of contacts
+
+### TLD Services (TldService)
+- `getInfo(string $tld)`: Get TLD information
+- `getPriceList()`: Get TLD price list
+
+### Web Hosting (WebHostingService)
+- `getHostingInfo(string $hostingId)`: Get web hosting information
+- `createHosting(array $hostingData)`: Create a new web hosting
 
 ## License
 
