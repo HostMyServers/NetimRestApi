@@ -116,7 +116,7 @@ $netim->closeSession();
 - `getDomainInfo(string $domain)`: Get domain information
 - `checkDomain(string $domain)`: Check domain availability
 - `checkDomainClaim(string $domain)`: Check domain claims
-- `createDomain(array $domainData)`: Register a new domain
+- `createDomain(string $domain, array $domainData)`: Register a new domain
 - `transferDomain(string $domain, array $transferData)`: Transfer a domain to Netim
 - `transferDomainTrade(string $domain, array $transferData)`: Transfer and trade a domain
 - `renewDomain(string $domain, int $period)`: Renew a domain
