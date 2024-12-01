@@ -31,9 +31,9 @@ class DomainService extends BaseService
     /**
      * Register a new domain
      */
-    public function createDomain(array $domainData): object
+    public function createDomain(string $domain, array $domainData): object
     {
-        return $this->request('POST', 'domain', [
+        return $this->request('POST', sprintf('domain/%s/', $domain), [
             'json' => $domainData
         ]);
     }
