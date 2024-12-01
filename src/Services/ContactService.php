@@ -10,7 +10,7 @@ class ContactService extends BaseService
      * @param array $contactData Contact data to create
      * @return object API response containing the contact ID
      */
-    public function createContact(array $contactData): object
+    public function createContact(array $contactData): object|string
     {
         return $this->request('POST', 'contact/', [
             'json' => [

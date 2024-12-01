@@ -21,7 +21,7 @@ abstract class BaseService
         $this->logger = $logger;
     }
 
-    protected function request(string $method, string $endpoint, array $options = [], bool $asArray = false): array|object
+    protected function request(string $method, string $endpoint, array $options = [], bool $asArray = false): array|object|string
     {
         try {
             if ($this->logger) {
