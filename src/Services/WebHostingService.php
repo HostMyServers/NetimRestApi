@@ -3,16 +3,16 @@
 namespace HostMyServers\NetimRestApi\Services;
 
 /**
- * Service pour gérer les hébergements web via l'API Netim.
+ * Service to manage web hosting through the Netim API.
  */
 class WebHostingService extends BaseService
 {
     /**
-     * Récupère les informations d'un hébergement web spécifique.
+     * Retrieves information about a specific web hosting.
      *
-     * @param string $hostingId ID de l'hébergement à récupérer.
-     * @return array Informations de l'hébergement.
-     * @throws NetimException Si une erreur survient lors de la requête.
+     * @param string $hostingId ID of the hosting to retrieve.
+     * @return array Hosting information.
+     * @throws NetimException If an error occurs during the request.
      */
     public function getHostingInfo(string $hostingId): array
     {
@@ -20,11 +20,11 @@ class WebHostingService extends BaseService
     }
 
     /**
-     * Crée un nouvel hébergement web.
+     * Creates a new web hosting.
      *
-     * @param array $hostingData Données de l'hébergement à créer.
-     * @return array Résultat de la création.
-     * @throws NetimException Si une erreur survient lors de la requête.
+     * @param array $hostingData Hosting data to create.
+     * @return array Creation result.
+     * @throws NetimException If an error occurs during the request.
      */
     public function createHosting(array $hostingData): array
     {
@@ -33,6 +33,5 @@ class WebHostingService extends BaseService
         ]);
     }
 
-    // Ajoutez d'autres méthodes liées à l'hébergement web ici...
+    // Add other web hosting related methods here...
 }
-
