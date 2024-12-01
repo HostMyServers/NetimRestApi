@@ -2,9 +2,6 @@
 
 namespace HostMyServers\NetimRestApi\Services;
 
-/**
- * Service pour gérer les requests liées aux TLD/gTLD.
- */
 class TldService extends BaseService
 {
     /**
@@ -13,5 +10,13 @@ class TldService extends BaseService
     public function getInfo(string $tld): object
     {
         return $this->request('GET', sprintf('tld/%s/', $tld));
+    }
+
+    /**
+     * Get TLDs list
+     */
+    public function getPriceList(): object
+    {
+        return $this->request('GET', 'tlds/price-list/');
     }
 }
