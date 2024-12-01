@@ -21,13 +21,11 @@ class DomainService extends BaseService
     }
 
     /**
-     * Check multiple domains availability
+     * Check domain Claim
      */
-    public function checkMultipleDomains(array $domains): object
+    public function checkDomainClaim(string $domain): object
     {
-        return $this->request('POST', 'domain/check/', [
-            'json' => ['domains' => $domains]
-        ]);
+        return $this->request('GET', sprintf('domain/%s/claim/', $domain));
     }
 
     /**
@@ -51,13 +49,25 @@ class DomainService extends BaseService
     }
 
     /**
+     * Transfer and Trade a domain to Netim
+     */
+    public function transferDomainTrade(string $domain, array $transferData): object
+    {
+        return $this->request('POST', sprintf('domain/%s/transfer-trade/', $domain), [
+            'json' => $transferData
+        ]);
+    }
+
+    /**
      * Renew a domain
      */
     public function renewDomain(string $domain, int $period): object
     {
         return $this->request('POST', sprintf('domain/%s/renew/', $domain), [
-            'json' => ['period' => $period]
-        ], true);
+            'json' => [
+                'duration' => $period
+            ]
+        ]);
     }
 
     /**
@@ -71,29 +81,16 @@ class DomainService extends BaseService
     }
 
     /**
-     * Get DNS servers for a domain
-     */
-    public function getDNS(string $domain): object
-    {
-        return $this->request('GET', sprintf('domain/%s/dns/', $domain));
-    }
-
-    /**
      * Enable/Disable WHOIS privacy
      */
     public function setWhoisPrivacy(string $domain, bool $enabled): object
     {
-        return $this->request('PUT', sprintf('domain/%s/whois-privacy/', $domain), [
-            'json' => ['enabled' => $enabled]
+        return $this->request('PATCH', sprintf('domain/%s/preference/', $domain), [
+            'json' => [
+                'codePref' => 'whois_privacy',
+                'value' => $enabled
+            ]
         ]);
-    }
-
-    /**
-     * Get WHOIS privacy status
-     */
-    public function getWhoisPrivacy(string $domain): array
-    {
-        return $this->request('GET', sprintf('domain/%s/whois-privacy/', $domain), [], true);
     }
 
     /**
@@ -101,17 +98,12 @@ class DomainService extends BaseService
      */
     public function setAutoRenew(string $domain, bool $enabled): object
     {
-        return $this->request('PUT', sprintf('domain/%s/auto-renew/', $domain), [
-            'json' => ['enabled' => $enabled]
+        return $this->request('PATCH', sprintf('domain/%s/preference/', $domain), [
+            'json' => [
+                'codePref' => 'auto_renew',
+                'value' => $enabled
+            ]
         ]);
-    }
-
-    /**
-     * Get auto-renewal status
-     */
-    public function getAutoRenew(string $domain): object
-    {
-        return $this->request('GET', sprintf('domain/%s/auto-renew/', $domain));
     }
 
     /**
@@ -143,19 +135,23 @@ class DomainService extends BaseService
     /**
      * Configure DNSSEC for a domain
      */
-    public function setDNSSEC(string $domain, array $dnssecData): object
+    public function setDNSSEC(string $domain, int $enabled): object
     {
-        return $this->request('PUT', sprintf('domain/%s/dnssec/', $domain), [
-            'json' => $dnssecData
+        return $this->request('PATCH', sprintf('domain/%s/dnssec/', $domain), [
+            'json' => [
+                'enable' => $enabled
+            ]
         ]);
     }
 
     /**
-     * Get DNSSEC configuration
+     * Configure DNSSEC External for a domain
      */
-    public function getDNSSEC(string $domain): object
+    public function setDNSSECExt(string $domain, array $dnssecData): object
     {
-        return $this->request('GET', sprintf('domain/%s/dnssec/', $domain));
+        return $this->request('PATCH', sprintf('domain/%s/dnssec/', $domain), [
+            'json' => $dnssecData
+        ]);
     }
 
     /**
