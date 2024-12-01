@@ -45,24 +45,6 @@ $availability = $netim->domain->checkDomain('example.com');
 // Get domain information
 $domainInfo = $netim->domain->getDomainInfo('example.com');
 
-// Check multiple domains
-$domains = ['example.com', 'example.net', 'example.org'];
-$multipleCheck = $netim->domain->checkMultipleDomains($domains);
-
-// Register a new domain
-$domainData = [
-    'duration' => 1,
-    'contacts' => [
-        'owner' => [
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-            'email' => 'john@example.com',
-            // ... other contact details
-        ]
-    ]
-];
-$registration = $netim->domain->createDomain($domainData);
-
 // Update DNS servers
 $nameservers = [
     'ns1.example.com',
