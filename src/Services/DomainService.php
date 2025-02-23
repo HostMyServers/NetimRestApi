@@ -63,7 +63,7 @@ class DomainService extends BaseService
      */
     public function renewDomain(string $domain, int $period): object
     {
-        return $this->request('POST', sprintf('domain/%s/renew/', $domain), [
+        return $this->request('PATCH', sprintf('domain/%s/renew/', $domain), [
             'json' => [
                 'duration' => $period
             ]
@@ -182,6 +182,6 @@ class DomainService extends BaseService
      */
     public function restoreDomain(string $domain): object
     {
-        return $this->request('POST', sprintf('domain/%s/restore/', $domain));
+        return $this->request('PATCH', sprintf('domain/%s/restore/', $domain));
     }
 }
