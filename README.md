@@ -26,7 +26,7 @@ Add these variables to your `.env` file:
 NETIM_LOGIN=your_login
 NETIM_SECRET=your_secret
 NETIM_LANGUAGE=EN
-NETIM_API_URL=https://api.netim.com/v1/
+NETIM_API_URL=https://rest.netim.com/1.0/
 ```
 
 The published configuration file will automatically use these environment variables.
@@ -134,13 +134,15 @@ $netim->closeSession();
 - `deleteContact(string $contactId)`: Delete a contact
 - `getContactList(string $field, string $filter)`: Get filtered list of contacts
 
+### Host Management (HostService)
+- `createHost(string $host, array $ipv4, array $ipv6)`: Create a new host (at least one IP required)
+- `getHostsList(string $filter)`: Get list of hosts matching a filter (wildcard `*` supported)
+- `updateHost(string $host, array $ipv4, array $ipv6)`: Update a host's IP addresses
+- `deleteHost(string $host)`: Delete a host (only if no domain uses it)
+
 ### TLD Services (TldService)
 - `getInfo(string $tld)`: Get TLD information
 - `getPriceList()`: Get TLD price list
-
-### Web Hosting (WebHostingService)
-- `getHostingInfo(string $hostingId)`: Get web hosting information
-- `createHosting(array $hostingData)`: Create a new web hosting
 
 ## License
 

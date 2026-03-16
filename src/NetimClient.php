@@ -7,7 +7,7 @@ use HostMyServers\NetimRestApi\Services\TldService;
 use HostMyServers\NetimRestApi\Services\ZonesService;
 use HostMyServers\NetimRestApi\Services\DomainService;
 use HostMyServers\NetimRestApi\Services\ContactService;
-use HostMyServers\NetimRestApi\Services\WebHostingService;
+use HostMyServers\NetimRestApi\Services\HostService;
 
 class NetimClient
 {
@@ -19,7 +19,7 @@ class NetimClient
     // Service instances
     public DomainService $domain;
     public ContactService $contact;
-    public WebHostingService $webHosting;
+    public HostService $host;
     public TldService $tld;
     public ZonesService $zones;
 
@@ -53,8 +53,8 @@ class NetimClient
         $this->domain = new DomainService($this->httpClient);
         $this->zones = new ZonesService($this->httpClient);
         $this->contact = new ContactService($this->httpClient);
+        $this->host = new HostService($this->httpClient);
         $this->tld = new TldService($this->httpClient);
-        // $this->webHosting = new WebHostingService($this->httpClient);
     }
 
     /**
