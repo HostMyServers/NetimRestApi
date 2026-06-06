@@ -101,6 +101,7 @@ $netim->closeSession();
 - `createDomain(string $domain, array $domainData)`: Register a new domain
 - `transferDomain(string $domain, array $transferData)`: Transfer a domain to Netim
 - `transferDomainTrade(string $domain, array $transferData)`: Transfer and trade a domain
+- `internalTransferDomain(string $domain, array $transferData)`: Transfer a domain to another Netim account
 - `renewDomain(string $domain, int $period)`: Renew a domain
 - `updateDNS(string $domain, array $nameservers)`: Update DNS servers
 - `setWhoisPrivacy(string $domain, bool $enabled)`: Enable/Disable WHOIS privacy

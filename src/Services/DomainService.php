@@ -59,6 +59,16 @@ class DomainService extends BaseService
     }
 
     /**
+     * Transfer a domain to another Netim account (internal transfer)
+     */
+    public function internalTransferDomain(string $domain, array $transferData): object
+    {
+        return $this->request('POST', sprintf('domain/%s/internal-transfer/', $domain), [
+            'json' => $transferData
+        ]);
+    }
+
+    /**
      * Renew a domain
      */
     public function renewDomain(string $domain, int $period): object
