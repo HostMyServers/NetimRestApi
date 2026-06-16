@@ -69,6 +69,18 @@ class DomainService extends BaseService
     }
 
     /**
+     * Change the owner (holder) of a domain. The new owner must be a contact with isOwner=1.
+     */
+    public function transferOwner(string $domain, string $idOwner): object
+    {
+        return $this->request('PUT', sprintf('domain/%s/transfer-owner/', $domain), [
+            'json' => [
+                'idOwner' => $idOwner
+            ]
+        ]);
+    }
+
+    /**
      * Renew a domain
      */
     public function renewDomain(string $domain, int $period): object

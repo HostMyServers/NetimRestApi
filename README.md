@@ -102,6 +102,7 @@ $netim->closeSession();
 - `transferDomain(string $domain, array $transferData)`: Transfer a domain to Netim
 - `transferDomainTrade(string $domain, array $transferData)`: Transfer and trade a domain
 - `internalTransferDomain(string $domain, array $transferData)`: Transfer a domain to another Netim account
+- `transferOwner(string $domain, string $idOwner)`: Change the owner (holder) of a domain (the new owner contact must have isOwner=1)
 - `renewDomain(string $domain, int $period)`: Renew a domain
 - `updateDNS(string $domain, array $nameservers)`: Update DNS servers
 - `setWhoisPrivacy(string $domain, bool $enabled)`: Enable/Disable WHOIS privacy
