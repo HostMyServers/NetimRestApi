@@ -109,7 +109,7 @@ $netim->closeSession();
 - `setAutoRenew(string $domain, bool $enabled)`: Enable/Disable auto-renewal
 - `getWhois(string $domain)`: Get WHOIS information
 - `deleteDomain(string $domain)`: Delete a domain
-- `getDomainsList()`: Get list of all domains
+- `getDomainsList(string $filter = '*')`: Get list of domains (name, creation and expiration dates) matching a filter
 - `setDNSSEC(string $domain, int $enabled)`: Configure DNSSEC
 - `setDNSSECExt(string $domain, array $dnssecData)`: Configure external DNSSEC
 - `setDomainLock(string $domain, string $locked)`: Update domain lock status

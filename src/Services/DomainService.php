@@ -147,11 +147,15 @@ class DomainService extends BaseService
     }
 
     /**
-     * Get list of all domains
+     * Get list of domains matching a filter
+     *
+     * Use * as wildcard (e.g. "*" for the whole portfolio or "*.eu").
+     *
+     * @return list<array{domain: string, dateCreate: string, dateExpiration: string}>
      */
-    public function getDomainsList(): object
+    public function getDomainsList(string $filter = '*'): array
     {
-        return $this->request('GET', 'domain/list/');
+        return $this->request('GET', sprintf('domains/%s', $filter), [], true);
     }
 
     /**
