@@ -14,9 +14,9 @@ class NetimException extends Exception
     /**
      * Code d'erreur retourné par l'API Netim.
      *
-     * @var int|null
+     * @var int|string|null
      */
-    protected ?int $apiErrorCode;
+    protected int|string|null $apiErrorCode;
 
     /**
      * Données supplémentaires retournées par l'API Netim.
@@ -28,31 +28,36 @@ class NetimException extends Exception
     /**
      * Constructeur de la classe NetimException.
      *
+     * L'API rend des codes d'erreur textuels (« ZONE_LOCKED ») autant que numériques, et
+     * « data » en objet quand la réponse est décodée en objet : les deux sont acceptés tels
+     * qu'ils arrivent, sans quoi la construction lèverait une TypeError à la place de
+     * l'exception attendue, et les catch (\Exception) des appelants la laisseraient passer.
+     *
      * @param string         $message      Le message d'erreur.
-     * @param int|null       $apiErrorCode Le code d'erreur retourné par l'API Netim.
-     * @param array|null     $apiErrorData Données supplémentaires associées à l'erreur.
+     * @param int|string|null $apiErrorCode Le code d'erreur retourné par l'API Netim.
+     * @param mixed          $apiErrorData Données supplémentaires associées à l'erreur.
      * @param int            $code         Le code d'erreur PHP (par défaut 0).
      * @param Throwable|null $previous     Exception précédente pour le chaînage d'exceptions.
      */
     public function __construct(
         string $message,
-        ?int $apiErrorCode = null,
-        ?array $apiErrorData = null,
+        int|string|null $apiErrorCode = null,
+        mixed $apiErrorData = null,
         int $code = 0,
-        Throwable $previous = null
+        ?Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
 
         $this->apiErrorCode = $apiErrorCode;
-        $this->apiErrorData = $apiErrorData;
+        $this->apiErrorData = self::asArray($apiErrorData);
     }
 
     /**
      * Récupère le code d'erreur retourné par l'API Netim.
      *
-     * @return int|null Le code d'erreur de l'API Netim, ou null s'il n'est pas défini.
+     * @return int|string|null Le code d'erreur de l'API Netim, ou null s'il n'est pas défini.
      */
-    public function getApiErrorCode(): ?int
+    public function getApiErrorCode(): int|string|null
     {
         return $this->apiErrorCode;
     }
@@ -83,5 +88,27 @@ class NetimException extends Exception
         }
         return $output;
     }
-}
 
+    /**
+     * Un objet décodé devient un tableau associatif de bout en bout ; une valeur scalaire
+     * est gardée sous « value » plutôt que perdue.
+     */
+    private static function asArray(mixed $data): ?array
+    {
+        if ($data === null) {
+            return null;
+        }
+
+        if (is_array($data)) {
+            return $data;
+        }
+
+        if (is_object($data)) {
+            $decoded = json_decode((string) json_encode($data), true);
+
+            return is_array($decoded) ? $decoded : ['value' => $data];
+        }
+
+        return ['value' => $data];
+    }
+}
