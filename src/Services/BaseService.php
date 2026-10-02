@@ -15,7 +15,7 @@ abstract class BaseService
     protected Client $httpClient;
     protected ?LoggerInterface $logger;
 
-    public function __construct(Client $httpClient, LoggerInterface $logger = null)
+    public function __construct(Client $httpClient, ?LoggerInterface $logger = null)
     {
         $this->httpClient = $httpClient;
         $this->logger = $logger;
