@@ -97,6 +97,7 @@ $netim->closeSession();
 ### Domain Management (DomainService)
 - `getDomainInfo(string $domain)`: Get domain information
 - `checkDomain(string $domain)`: Check domain availability
+- `getDomainPrice(string $domain)`: Get the prices of a domain name (`IsPremium`, `Fee4Registration`, `Fee4Renewal`, `Fee4Transfer`, `Fee4Restore`)
 - `checkDomainClaim(string $domain)`: Check domain claims
 - `createDomain(string $domain, array $domainData)`: Register a new domain
 - `transferDomain(string $domain, array $transferData)`: Transfer a domain to Netim

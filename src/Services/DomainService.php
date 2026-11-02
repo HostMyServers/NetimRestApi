@@ -21,6 +21,19 @@ class DomainService extends BaseService
     }
 
     /**
+     * Get the prices of a domain name: a premium name has its own, well above the TLD price list.
+     * The fees are numeric strings, or "contact us" when the registry sets no public price.
+     * Callers read it in front of a paid order, so a hung registry must not hold them.
+     */
+    public function getDomainPrice(string $domain): object
+    {
+        return $this->request('GET', sprintf('domain/%s/price/', $domain), [
+            'connect_timeout' => 5,
+            'timeout' => 15,
+        ]);
+    }
+
+    /**
      * Check domain Claim
      */
     public function checkDomainClaim(string $domain): object
